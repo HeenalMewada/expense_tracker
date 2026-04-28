@@ -1,0 +1,204 @@
+Modal 
+import React, { use } from "react";
+import "./Dashboard.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Modal from "./Modal";
+import { CgPlayButton } from "react-icons/cg";
+
+
+
+function Dashboard() {
+    const [income, setIncome] = useState();
+    const [expense, setExpense] = useState();
+    const [amount, setAmount] = useState();
+    const [show, setShow] = useState(false);
+    const [type, setType] = useState("");
+    
+    
+    const modal = useNavigate();
+         function handleSubmit(e){
+    e.preventDefault();
+    console.log(amount,category,type);
+
+ fetch("http://localhost/expense-tracker/tracker/backend/transaction.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                amount : amount,
+                type : type,
+                category : category
+            })
+        });
+         }
+    return (
+        <div className="dashboard">
+            <div className="cards">
+                <div className="card balance">
+
+                    <p className="card_title">Balance</p>
+                </div>
+                <div className="card income">
+                    <p className="card_title">Income</p>
+                    <button onClick={() =>{setType("income"); setShow(true)} }className="btn"><CgPlayButton /></button>
+                   
+                </div>
+                <div className="card expense">
+                    <p className="card_title">Expense</p>
+                    <button onClick={() => {alert("clicked");setType("expense");setShow(true)}} className="btn" ><CgPlayButton /></button>
+                   
+                    
+                    
+                </div>
+
+            </div>
+{show && <Modal setShow={setShow} type={type} />}
+        </div>
+    )
+}
+
+export default Dashboard;import React from "react";
+import { useState } from "react";
+import "./Modal.css";
+import { GiCrossMark } from "react-icons/gi";
+
+
+function Modal({setShow,type}){
+  
+    return(
+
+<div className="modal">
+<p>{type === "income" ? "Total Income" : "Total Expense"}</p>
+{type === "income" && (
+<form action="" id="modalForm">
+    <div>
+    <label htmlFor="">Amount</label>
+   <input type="text" name="amount" id="amount" />
+   </div>
+   <div>
+    <label htmlFor="">Source</label>
+    <select name="" id="">
+        <option value="">salary</option>
+    <option value="">freelance</option>
+    <option value="">others</option>
+    </select>
+    </div>
+    
+</form>
+)}
+<button className="dltModal" onClick={()=>setShow(false)}><GiCrossMark/></button>
+
+<div className="expense">
+
+{type === "expense" && (
+  <form>
+    <div>
+      <label>Amount</label>
+      <input type="text" />
+    </div>
+
+    <div>
+      <label>Source</label>
+      <select>
+        <option>Food</option>
+        <option>Shopping</option>
+        <option>Travel</option>
+        <option>Others</option>
+      </select>
+    </div>
+  </form>
+)}
+<button className="dltModal" onClick={()=>setShow(false)}><GiCrossMark/></button>
+</div>
+</div>
+
+    )
+}
+export default Modal;/* Overlay (background) */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  position: relative;
+}
+
+/* Modal box */
+#modalForm {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+}
+
+/* Heading */
+.modal p {
+  position: absolute;
+  top: 20%;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+#modalForm input,
+#modalForm select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+#modalForm input:focus,
+#modalForm select:focus {
+  border-color: #6a11cb;
+}
+
+/* Button */
+.addIncome {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* Button hover */
+.addIncome:hover {
+  transform: scale(1.05);
+}
+
+label{
+    color: black;
+}
+.dltModal{
+    
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+    background: rgba(245, 240, 240, 0.2);
+    border: 1px solid transparent;
+    color: red;
+    font-size: 16px;
+    
+}

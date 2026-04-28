@@ -1,0 +1,91 @@
+import React from "react";
+import "./Dashboard.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Modal from "./Modal";
+import { CgPlayButton } from "react-icons/cg";
+import { useEffect } from "react";
+import Card from "./Card.jsx"
+import PieChart from "./PieChart.jsx";
+import RecentTransactions from "./RecentTransactions.jsx"
+
+function Dashboard() {
+    const [transaction, setTransaction] = useState([]); 
+    const [show, setShow] = useState(false);
+    const [type, setType] = useState("");
+
+
+    const modal = useNavigate();
+   
+        fetch("http://localhost/expense-tracker/tracker/backend/dashboard.php")
+
+            .then((res) => (res.json()))
+            .then((data) => {
+                
+                
+                setTransaction(data) })
+            .catch((err) => (err.message))
+
+const incomeData = transaction.filter((item) => item.type === "income");
+const expenseData = transaction.filter((item) => item.type === "expense");
+const totalIncome = incomeData.reduce((acc, item) => acc + Number(item.amount), 0);
+const totalExpense = expenseData.reduce((acc, item) => acc + Number(item.amount), 0);
+const totalbalance = totalIncome-totalExpense;
+let label = "";
+
+if (totalExpense > totalIncome) {
+  label = "⚠ Overspent";
+}
+// const expenseData = transaction.filter(item => item.type === "expense");
+
+const categoryMap = {};
+
+expenseData.forEach(item => {
+  const cat = item.category;
+  const amt = Number(item.amount);
+
+  if (categoryMap[cat]) {
+    categoryMap[cat] += amt;
+  } else {
+    categoryMap[cat] = amt;
+  }
+});
+    return (
+        
+        <div className="dashboard">
+<div className="cards">
+   
+  <Card type="Balance" amount={totalbalance} className="balance" />
+  {/* <p style={{color:"red"}}>{label}</p> */}
+  
+  <Card type="Income" amount={totalIncome}  onClick={() =>{setType("income"); setShow(true)}}  className="income"/>
+  <Card type="Expense" amount={totalExpense} onClick={() => {
+      setType("expense");
+      setShow(true);
+    }} className="expense"/>
+
+    
+</div>
+
+
+
+
+{show && <Modal setShow={setShow} type={type} />}
+<div style={{ width: "100%", height: "300px", marginTop:"50px" , display:"flex",justifyContent:"space-evenly"}}>
+  <div className="recent_transactions">
+<RecentTransactions transaction={transaction}> </RecentTransactions>
+</div>
+<PieChart 
+  totalIncome={totalIncome} 
+  totalExpense={totalExpense} 
+/>
+<PieChart categoryMap={categoryMap} />
+
+
+</div>
+        </div>
+
+    )
+}
+
+export default Dashboard;

@@ -1,0 +1,21 @@
+
+.balance {
+    background-color: rgb(98, 98, 235);
+    position: relative;
+}
+.income{
+    background-color: rgb(42, 199, 42);
+    position: relative;
+}
+.expense{
+    background-color: rgb(235, 70, 70);
+}
+
+.card.income .btn {
+  color: #088636;
+}
+
+.card.expense .btn {
+    color: rgb(156, 13, 13) ;
+}
+

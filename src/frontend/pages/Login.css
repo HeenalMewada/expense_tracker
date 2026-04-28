@@ -1,0 +1,102 @@
+.Login_container{
+    width: 400px;
+    height: 430px;
+    border: 1px solid rgb(212, 208, 208);
+   /* display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column; */
+   margin:100px auto;
+    border-radius: 10px;
+   background: linear-gradient(rgb(202, 112, 202), rgb(128, 128, 223));
+     /* box-shadow: 4px 4px rgb(212, 208, 208);  */
+     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+#form{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: 20px;
+    
+}
+
+#form input{
+    width: 350px;
+    height:35px;
+    border-radius: 10px;
+    border: 1px solid rgb(119, 116, 116);
+}
+
+input:focus{
+   outline: none;
+    border: 2px solid blue;
+    /* box-shadow: 0 0 5px blue; */
+}
+label{
+    margin-top: 20px;
+   color: rgba(255,255,255,0.8);
+   font-weight: 500;
+   font-size: 20px;
+   margin-bottom: 5px;
+}
+
+#signin_button{
+    width: 350px;
+    height:40px;
+    margin-top: 20px;
+    background-color:rgb(58, 58, 245);
+    border: 1px solid rgb(92, 86, 86);
+    border-radius: 10px;
+    font-size: 17px;
+    color: white;
+    
+}
+
+#signin_button:hover{
+     background-color:rgb(7, 7, 177);
+     /* transform: translate(1.2); */
+}
+.buttons{
+    display: flex;
+    justify-content: flex-start;
+    /* gap:5px; */
+    /* margin-top: 20px; */
+    margin-left: 2px;
+}
+.divider{
+    width: 350px;
+    height: 1px;
+    /* margin:0.03rem; */
+    background-color: rgb(124, 116, 116);
+    margin-top: 2px;
+}
+
+.buttons button{
+    width: 120px;
+    /* height:30px; */
+    border-radius: 10px;
+    padding: 10px 10px;
+    background-color: white;
+    border: 1px solid rgb(160, 152, 152);
+}
+
+.lock_icon{
+    margin-top: 10px;
+    /* font-size: 25px; */
+    padding:8px 8px;
+    /* background-color: rgb(195, 195, 243); */
+    background:linear-gradient(white, rgb(194, 194, 235));
+    border-radius: 10px;
+     transition: 0.3s;
+     
+    
+}
+.lock_icon:hover{
+    transform: scale(1.2) rotate(10deg);
+}
+input::placeholder{
+padding-left: 7px;
+}
