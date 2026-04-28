@@ -7,6 +7,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 
 function RecentTransactions({transaction}){
   const [showAll, setShowAll] = useState(false); 
+  const [active, setActive] = useState(false);
    const expenseData = transaction.filter((item) => item.type === "expense");
   const data = [...expenseData].sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -22,6 +23,7 @@ const recent = showAll ? data : data.slice(0, 5);
 function showData(){
   const show = data.slice(0);
 }
+const DeleteData= transaction.filter((item) => item.id!==deletedID)
   return(
     <div className="transactions">
       <h4>Recent Expenses</h4>
@@ -33,7 +35,7 @@ function showData(){
       <div style={{display:"flex",gap:"20px",verticalAlign:"center",justifyContent:"space-around",alignItems:"centerc"}}>
         <p>{icons[item.category]} </p>
       <p>₹ {item.amount}</p>
-<p className="category"> {item.category}</p>
+<p className="category" > {item.category}</p>
 </div>
 
 <p className="date">{new Date(item.created_at).toLocaleDateString("en-IN", {
@@ -51,7 +53,10 @@ function showData(){
           {showAll ? "← Show Less" : "View All →"}
         </a>
       )}
+        <button onClick={()=>setActive(true)}>Delete Button</button>
+        {Active ? "true" : item.id==null}
     </div>
+  
   )
 }
 
