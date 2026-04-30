@@ -9,6 +9,7 @@ import Card from "./Card.jsx"
 import PieChart from "./PieChart.jsx";
 import RecentTransactions from "./RecentTransactions.jsx"
 
+
 function Dashboard() {
     const [transaction, setTransaction] = useState([]); 
     const [show, setShow] = useState(false);
@@ -16,8 +17,8 @@ function Dashboard() {
 
 
     const modal = useNavigate();
-   
-        fetch("http://localhost/expense-tracker/tracker/backend/dashboard.php")
+   useEffect(()=>{
+fetch("http://localhost/expense-tracker/tracker/backend/dashboard.php")
 
             .then((res) => (res.json()))
             .then((data) => {
@@ -25,6 +26,8 @@ function Dashboard() {
                 
                 setTransaction(data) })
             .catch((err) => (err.message))
+   },[])
+        
 
 const incomeData = transaction.filter((item) => item.type === "income");
 const expenseData = transaction.filter((item) => item.type === "expense");
@@ -50,6 +53,14 @@ expenseData.forEach(item => {
     categoryMap[cat] = amt;
   }
 });
+function handleDelete(id) {
+  const updated = transaction.filter((item) => Number(item.id) !== id);
+  setTransaction(updated);
+  console.log(id);
+  console.log(updated);
+  
+  
+}
     return (
         
         <div className="dashboard">
@@ -73,7 +84,7 @@ expenseData.forEach(item => {
 {show && <Modal setShow={setShow} type={type} />}
 <div style={{ width: "100%", height: "300px", marginTop:"50px" , display:"flex",justifyContent:"space-evenly"}}>
   <div className="recent_transactions">
-<RecentTransactions transaction={transaction}> </RecentTransactions>
+<RecentTransactions transaction={transaction} onDelete={handleDelete}> </RecentTransactions>
 </div>
 <PieChart 
   totalIncome={totalIncome} 

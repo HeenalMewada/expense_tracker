@@ -5,9 +5,9 @@ import { IoFastFood } from "react-icons/io5";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 
-function RecentTransactions({transaction}){
+function RecentTransactions({transaction,onDelete}){
   const [showAll, setShowAll] = useState(false); 
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(null);
    const expenseData = transaction.filter((item) => item.type === "expense");
   const data = [...expenseData].sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -23,7 +23,8 @@ const recent = showAll ? data : data.slice(0, 5);
 function showData(){
   const show = data.slice(0);
 }
-const DeleteData= transaction.filter((item) => item.id!==deletedID)
+
+
   return(
     <div className="transactions">
       <h4>Recent Expenses</h4>
@@ -31,7 +32,7 @@ const DeleteData= transaction.filter((item) => item.id!==deletedID)
 {recent.map((item, index)=>{
   return(
   <div key={index}>
-    <div className="transaction-item">
+    <div className="transaction-item" onClick={()=>setActive(item.id)}>
       <div style={{display:"flex",gap:"20px",verticalAlign:"center",justifyContent:"space-around",alignItems:"centerc"}}>
         <p>{icons[item.category]} </p>
       <p>₹ {item.amount}</p>
@@ -42,7 +43,11 @@ const DeleteData= transaction.filter((item) => item.id!==deletedID)
   day: "numeric",
   month: "short"
 })}</p>
-
+        {item.id === active && (
+  <button onClick={() => onDelete(Number(item.id))}>
+    Delete
+  </button>
+)}
 </div>
 
 </div>
@@ -53,8 +58,7 @@ const DeleteData= transaction.filter((item) => item.id!==deletedID)
           {showAll ? "← Show Less" : "View All →"}
         </a>
       )}
-        <button onClick={()=>setActive(true)}>Delete Button</button>
-        {Active ? "true" : item.id==null}
+
     </div>
   
   )
