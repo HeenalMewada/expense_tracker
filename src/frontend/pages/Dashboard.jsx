@@ -58,6 +58,7 @@ function handleDelete(id) {
   setTransaction(updated);
   console.log(id);
   console.log(updated);
+ 
   
   
 }
