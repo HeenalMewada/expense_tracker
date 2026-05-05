@@ -19,10 +19,7 @@
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    /* padding-top: 100px;  */
     border-radius: 10px;
-
-
 }
 
 .leftside_heading {
@@ -33,9 +30,7 @@
 
 .right_side {
     width: 70%;
-    /* background-color: rgb(150, 11, 34); */
     height: 450px;
-    /* margin-top: 30px; */
 }
 
 #form {
@@ -45,52 +40,146 @@
     flex-direction: column;
     margin-left: 10px;
     margin-top: 20px;
-
 }
 
 #form input {
     width: 350px;
-    height:35px;
+    height: 35px;
     border-radius: 10px;
     border: 1px solid rgb(119, 116, 116);
     padding-left: 10px;
-
-
 }
-input:focus{
-   outline: none;
+
+input:focus {
+    outline: none;
     border: 2px solid blue;
-    /* box-shadow: 0 0 5px blue; */
 }
 
-label{
+label {
     margin-top: 20px;
-   color: rgba(255,255,255,0.8);
-   font-weight: 500;
-   font-size: 20px;
-   margin-bottom: 5px;
-   
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 5px;
 }
 
 .r_divider {
     width: 1px;
     height: 100%;
-    /* margin:0.03rem; */
     background-color: rgb(139, 130, 130);
     margin-top: 2px;
 }
 
 .r_button {
     width: 350px;
-    height:40px;
+    height: 40px;
     margin-top: 20px;
-    background-color:rgb(58, 58, 245);
+    background-color: rgb(58, 58, 245);
     border: 1px solid rgb(92, 86, 86);
     border-radius: 10px;
     font-size: 17px;
     color: white;
 }
 
-.r_button:hover{
-     background-color:rgb(7, 7, 177);
+.r_button:hover {
+    background-color: rgb(7, 7, 177);
+}
+
+
+/* =============================================
+   MEDIA QUERIES — design same, sirf responsive
+   ============================================= */
+
+/* Tablet: 601px – 900px */
+@media (max-width: 900px) {
+    .register_container {
+        width: 90%;
+        height: auto;
+        flex-direction: column;
+        padding: 20px 0 30px 0;
+    }
+
+    .left_side {
+        width: 100%;
+        height: auto;
+    }
+
+    .leftside_heading {
+        margin-top: 30px;
+        font-size: 26px;
+    }
+
+    .r_divider {
+        width: 80%;
+        height: 1px;
+    }
+
+    .right_side {
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+
+    #form {
+        margin-left: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #form input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .r_button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Mobile: max 600px */
+@media (max-width: 600px) {
+    .register_container {
+        width: 92%;
+        margin: 40px auto;
+    }
+
+    .leftside_heading {
+        font-size: 22px;
+        margin-top: 20px;
+    }
+
+    label {
+        font-size: 17px;
+    }
+
+    .right_side {
+        padding: 0 16px;
+    }
+
+    .r_button {
+        font-size: 15px;
+    }
+}
+
+/* Small mobile: max 380px */
+@media (max-width: 380px) {
+    .register_container {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    .leftside_heading {
+        font-size: 19px;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    .r_button {
+        font-size: 14px;
+        height: 38px;
+    }
 }

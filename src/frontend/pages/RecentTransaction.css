@@ -1,39 +1,196 @@
+/* ===== BASE STYLES ===== */
+.dltbtn {
+    color: red;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
 
+.editbtn {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
 
+.exportBtn {
+    margin-bottom: 10px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    background-color: rgb(90, 88, 88);
+    color: whitesmoke;
+    border: none;
+    cursor: pointer;
+}
 
-.transactions{
-    width: 400px;
+.transactions {
+    width: 380px;
     background-color: rgb(70, 66, 66);
     border-radius: 5px;
+    padding-bottom: 8px;
+    height: fit-content;      /* sirf content jitna height */
+    overflow: hidden;         /* scroll bilkul nahi */
+    box-sizing: border-box;
 }
-.transactions h4{
+
+.transactions .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.transactions h4 {
     text-align: left;
     color: white;
     padding-top: 10px;
     padding-left: 10px;
     background-color: rgb(90, 88, 88);
-    height:30px;
-    /* box-shadow: 2px 4px rgb(90, 88, 88); */
+    height: 30px;
     border-radius: 10px;
-    
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 10px 0;
 }
-.transaction-item{
-display: flex;
-justify-content: space-around;
-flex-direction: row;
-/* align-items: center; */
-/* gap:25px; */
-margin-left:10px;
-color: white;
-padding-bottom: 7px;
-vertical-align: center;
+
+/* ── transaction-item: outer row ── */
+.transaction-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    cursor: pointer;
+    gap: 6px;
+    overflow: hidden;
 }
-a{
-    width: 100px;
-    height: 25px;
-    /* background-color: rgb(119, 114, 114); */
-    border: 1px solid transparent;
-    border-radius: 5px;
-    margin-bottom: 10px;
+
+/* ── inner div (emoji + amount + category) ── */
+.transaction-item > div {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* ── sabhi <p> tags ── */
+.transaction-item p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* emoji */
+.transaction-item p:first-child {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+/* ₹ amount */
+.transaction-item p:nth-child(2) {
+    min-width: 70px;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* category */
+.transaction-item .category {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: capitalize;
+    flex: 1;
+    min-width: 0;
+}
+
+/* date */
+.transaction-item .date {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* View All link */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
     color: wheat;
+    cursor: pointer;
+    font-size: 0.88rem;
+    text-decoration: none;
+}
+
+
+/* ===== RESPONSIVE: Tablets (768px - 1199px) ===== */
+@media (max-width: 1199px) and (min-width: 768px) {
+    .transactions {
+        width: 340px;
+    }
+}
+
+
+/* ===== RESPONSIVE: Mobile (767px aur niche) ===== */
+@media (max-width: 767px) {
+    .transactions {
+        width: 95vw;
+        max-width: 420px;
+    }
+
+    .transaction-item {
+        padding: 6px 8px;
+        gap: 4px;
+    }
+
+    .transaction-item p:nth-child(2) {
+        min-width: 62px;
+        font-size: 0.85rem;
+    }
+
+    .dltbtn { font-size: 20px; }
+    .editbtn { font-size: 17px; }
+}
+
+
+/* ===== RESPONSIVE: Small mobile (480px aur niche) ===== */
+@media (max-width: 480px) {
+    .transactions {
+        width: 98vw;
+    }
+
+    .transaction-item {
+        padding: 5px 6px;
+        gap: 3px;
+    }
+
+    .transaction-item p:nth-child(2) {
+        min-width: 58px;
+        font-size: 0.82rem;
+    }
+
+    .transaction-item .category {
+        font-size: 0.82rem;
+    }
+
+    .transaction-item .date {
+        font-size: 0.75rem;
+    }
+
+    .dltbtn { font-size: 18px; }
+    .editbtn { font-size: 15px; }
+
+    .exportBtn {
+        font-size: 0.82rem;
+        padding: 6px 10px;
+    }
 }

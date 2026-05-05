@@ -3,9 +3,11 @@ import "./RecentTransaction.css"
 import { useState } from "react";
 import { IoFastFood } from "react-icons/io5";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+import { exportToExcel } from "./ExportExcel";
 
 
-function RecentTransactions({transaction,onDelete}){
+function RecentTransactions({transaction,onDelete, onEdit}){
   const [showAll, setShowAll] = useState(false); 
   const [active, setActive] = useState(null);
    const expenseData = transaction.filter((item) => item.type === "expense");
@@ -24,10 +26,20 @@ function showData(){
   const show = data.slice(0);
 }
 
+function handleExportExpense() {
+  const expenseData = transaction.filter(
+    (item) => item.type === "expense"
+  );
+
+  exportToExcel(expenseData, "expenses.xlsx");
+}
 
   return(
     <div className="transactions">
+     <div className="container">
       <h4>Recent Expenses</h4>
+      <button onClick={handleExportExpense} className="exportBtn">Export Excel</button>
+      </div>
        
 {recent.map((item, index)=>{
   return(
@@ -44,9 +56,14 @@ function showData(){
   month: "short"
 })}</p>
         {item.id === active && (
-  <button onClick={() => onDelete(Number(item.id))}>
-    Delete
+          <>
+  <button onClick={() => onDelete(Number(item.id))} className="dltbtn">
+    <RxCross2 />
   </button>
+  <button onClick={() => onEdit(item)} className="editbtn">
+      ✏️
+    </button>
+    </>
 )}
 </div>
 

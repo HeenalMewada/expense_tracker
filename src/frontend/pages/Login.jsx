@@ -45,7 +45,7 @@ function Login() {
                 <input type="email" value={email} id="email" onChange={(e) => setEmail(e.target.value)}  placeholder="abc@gmail.com"/>
                 <label htmlFor="">Password</label>
                 <input type="password" value={password} id="password" onChange={(e) => setPassword(e.target.value)} placeholder="123456"/>
-                <button type="submit" id="signin_button" onClick={()=>dashboard("/Dashboard")}>Sign in</button>
+                <button type="submit" id="signin_button" onClick={()=>dashboard("/Dashboard")} disabled={!email && !password}>Sign in</button>
 
             </form>
             

@@ -3,7 +3,7 @@ import "./Card.css"
 import { IoIosAdd } from "react-icons/io";
 
 
-function Card({ type, amount, onClick, className }) {
+function Card({ type, amount, onClick, className, onExport }) {
     return (
 
         <div className={`card ${className}`}>
@@ -15,13 +15,19 @@ function Card({ type, amount, onClick, className }) {
             <h2 className="card_title">{type}</h2>
             <p className="card_amount">₹ {amount}</p>
             {onClick && (
+                <>
                 <button onClick={onClick} className="btn">
 
                    <IoIosAdd /> Add
 
                 </button>
+
                
+               </>
             )}
+            {onExport && (<button onClick={onExport} className="export">  ⬇ Export</button>
+)}
+ 
         </div>
 
 

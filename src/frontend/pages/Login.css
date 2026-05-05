@@ -100,3 +100,74 @@ label{
 input::placeholder{
 padding-left: 7px;
 }
+
+
+/* =============================================
+   MEDIA QUERIES — design same, sirf responsive
+   ============================================= */
+
+/* Tablet: 401px – 600px */
+@media (max-width: 600px) {
+    .Login_container {
+        width: 92%;
+        height: auto;              /* height fix nahi — content ke hisaab se badhegi */
+        margin: 40px auto;
+        padding-bottom: 20px;
+    }
+
+    #form {
+        margin-left: 0;
+        padding: 0 16px;
+        width: 100%;
+    }
+
+    #form input {
+        width: 100%;              /* 350px ki jagah full width */
+    }
+
+    #signin_button {
+        width: 100%;              /* button bhi full width */
+    }
+
+    .divider {
+        width: calc(100% - 32px); /* form ke andar fit ho */
+        margin-left: 16px;
+    }
+
+    .buttons {
+        margin-left: 16px;
+        gap: 8px;
+        flex-wrap: wrap;          /* buttons ek line mein na aayen toh wrap ho */
+    }
+
+    .buttons button {
+        width: auto;
+        flex: 1;                  /* gap fill karo equally */
+        min-width: 80px;
+    }
+
+    label {
+        font-size: 17px;
+    }
+}
+
+/* Small mobile: 320px – 400px */
+@media (max-width: 400px) {
+    .Login_container {
+        width: 95%;
+        margin: 24px auto;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    #signin_button {
+        font-size: 15px;
+    }
+
+    .buttons button {
+        font-size: 12px;
+        padding: 8px 6px;
+    }
+}

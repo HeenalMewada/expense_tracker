@@ -8,12 +8,14 @@ import { useEffect } from "react";
 import Card from "./Card.jsx"
 import PieChart from "./PieChart.jsx";
 import RecentTransactions from "./RecentTransactions.jsx"
+import { exportToExcel } from "./ExportExcel.jsx";
 
 
 function Dashboard() {
     const [transaction, setTransaction] = useState([]); 
     const [show, setShow] = useState(false);
     const [type, setType] = useState("");
+    const [editItem, setEditItem] = useState(null);
 
 
     const modal = useNavigate();
@@ -36,7 +38,7 @@ const totalExpense = expenseData.reduce((acc, item) => acc + Number(item.amount)
 const totalbalance = totalIncome-totalExpense;
 let label = "";
 
-if (totalExpense > totalIncome) {
+if (totalbalance < 5000) {
   label = "⚠ Overspent";
 }
 // const expenseData = transaction.filter(item => item.type === "expense");
@@ -62,18 +64,33 @@ function handleDelete(id) {
   
   
 }
+function handleEdit(item) {
+  setEditItem(item);
+  setType(item.type);
+  setShow(true);
+}
+function handleExportIncome() {
+  const incomeData = transaction.filter(
+    (item) => item.type === "income"
+    
+
+  );
+
+  exportToExcel(incomeData, "income.xlsx");
+}
     return (
         
         <div className="dashboard">
 <div className="cards">
    
-  <Card type="Balance" amount={totalbalance} className="balance" />
-  {/* <p style={{color:"red"}}>{label}</p> */}
+  <Card type="Balance" amount={totalbalance} className="balance"  />
+  <p style={{color:"red"}} className="label">{label}</p>
   
-  <Card type="Income" amount={totalIncome}  onClick={() =>{setType("income"); setShow(true)}}  className="income"/>
+  <Card type="Income" amount={totalIncome}  onClick={() =>{setType("income"); setShow(true)}} onExport={handleExportIncome}  className="income"/>
   <Card type="Expense" amount={totalExpense} onClick={() => {
       setType("expense");
       setShow(true);
+      setEditItem(item); 
     }} className="expense"/>
 
     
@@ -82,10 +99,10 @@ function handleDelete(id) {
 
 
 
-{show && <Modal setShow={setShow} type={type} />}
-<div style={{ width: "100%", height: "300px", marginTop:"50px" , display:"flex",justifyContent:"space-evenly"}}>
+{show && <Modal setShow={setShow} type={type}  editItem={editItem}/>}
+<div className="pie" style={{ width: "100%", height: "300px", marginTop:"50px" , display:"flex",justifyContent:"space-evenly"}}>
   <div className="recent_transactions">
-<RecentTransactions transaction={transaction} onDelete={handleDelete}> </RecentTransactions>
+<RecentTransactions transaction={transaction} onDelete={handleDelete}  onEdit={handleEdit}> </RecentTransactions>
 </div>
 <PieChart 
   totalIncome={totalIncome} 

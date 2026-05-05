@@ -1,21 +1,129 @@
-
+/* ===== BASE STYLES (unchanged) ===== */
 .balance {
     background-color: rgb(98, 98, 235);
     position: relative;
 }
-.income{
+
+.balance .label {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+}
+
+.income {
     background-color: rgb(42, 199, 42);
     position: relative;
 }
-.expense{
+
+.expense {
     background-color: rgb(235, 70, 70);
 }
 
 .card.income .btn {
-  color: #088636;
+    color: #088636;
 }
 
 .card.expense .btn {
-    color: rgb(156, 13, 13) ;
+    color: rgb(156, 13, 13);
 }
 
+
+/* ===== RESPONSIVE: Large screens (1200px+) ===== */
+@media (min-width: 1200px) {
+    .balance .label {
+        right: 80px;
+        font-size: 1rem;
+    }
+    .cards{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .pie{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width:100% ;
+    }
+}
+
+
+/* ===== RESPONSIVE: Tablets (768px - 1199px) ===== */
+@media (max-width: 1199px) and (min-width: 768px) {
+    .balance .label {
+        right: 30px;
+        font-size: 0.95rem;
+    }
+    .cards{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .pie{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width:100% ;
+    }
+}
+
+
+/* ===== RESPONSIVE: Mobile (767px aur niche) ===== */
+@media (max-width: 767px) {
+    .balance .label {
+        /* Mobile pe absolute position theek se kaam nahi karta
+           isliye normal flow me le aate hain */
+        position: relative;
+        bottom: auto;
+        right: auto;
+        display: block;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 0.9rem;
+    }
+    .cards{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .pie{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width:100% ;
+    }
+}
+
+
+/* ===== RESPONSIVE: Small mobile (480px aur niche) ===== */
+@media (max-width: 480px) {
+    .balance .label {
+        font-size: 0.82rem;
+        padding: 4px 0;
+    }
+
+    .card.income .btn,
+    .card.expense .btn {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
+    .cards{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .pie{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width:100% ;
+    }
+}

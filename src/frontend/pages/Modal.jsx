@@ -2,14 +2,22 @@ import React, { use } from "react";
 import "./Modal.css";
 import { GiCrossMark } from "react-icons/gi";
 import { useState } from "react";
+import { useEffect } from "react";
+import Dashboard from "./Dashboard";
 
-function Modal({ setShow, type }) {
+function Modal({ setShow, type, editItem }) {
     const [amount, setAmount] = useState("");
     const [source, setSource] = useState("Salary");
     const [category, setCategory] = useState("food");
     const [loading, setLoading] = useState(false);
 
-
+useEffect(() => {
+  if (editItem) {
+    setAmount(editItem.amount);
+    setCategory(editItem.category || "food");
+    setSource(editItem.source || "salary");
+  }
+}, [editItem]);
 
 
     async function handleSubmit(e) {
@@ -26,6 +34,7 @@ function Modal({ setShow, type }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                id: editItem.id,
                 amount: amount,
                 type: type,
                 source: type === "income" ? source : null,
