@@ -16,7 +16,7 @@ function Login() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log(email, password);
-        fetch("http://localhost/expense-tracker/tracker/backend/login.php", {
+        fetch(`${import.meta.env.VITE_API_URL}/login.php`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
