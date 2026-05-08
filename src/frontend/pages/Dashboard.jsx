@@ -38,7 +38,7 @@ const totalExpense = expenseData.reduce((acc, item) => acc + Number(item.amount)
 const totalbalance = totalIncome-totalExpense;
 let label = "";
 
-if (totalbalance < 5000) {
+if (totalbalance <=5000) {
   label = "⚠ Overspent";
 }
 // const expenseData = transaction.filter(item => item.type === "expense");
