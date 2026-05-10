@@ -20,7 +20,7 @@ function Dashboard() {
 
     const modal = useNavigate();
    useEffect(()=>{
-fetch(`${import.meta.env.VITE_API_URL}/dashboard.php`)
+fetch(`${import.meta.env.VITE_API_URL}dashboard.php`)
 
             .then((res) => (res.json()))
             .then((data) => {

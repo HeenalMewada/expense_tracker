@@ -28,7 +28,7 @@ useEffect(() => {
 
         console.log(amount, category, type, source);
 
-        await fetch(`${import.meta.env.VITE_API_URL}/transaction.php`, {
+        await fetch(`${import.meta.env.VITE_API_URL}transaction.php`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -19,7 +19,7 @@ return
 if(password!==confirmPassword)
     setError("Password don't match");
 return
-        fetch(`${import.meta.env.VITE_API_URL}/register.php`, {
+        fetch(`${import.meta.env.VITE_API_URL}register.php`, {
             method: "POST",
              headers: {
       "Content-Type": "application/json"
