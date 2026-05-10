@@ -13,21 +13,47 @@ function Login() {
     const l_to_r = useNavigate();
     const dashboard= useNavigate();
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log(email, password);
-        fetch(`${import.meta.env.VITE_API_URL}/login.php`, {
+   async function handleSubmit(e) {
+
+    e.preventDefault();
+
+    try {
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/login.php`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                l_email: email,
-                l_password: password
+                email: email,
+                password: password
             })
         });
-    }
 
+        const data = await response.json();
+
+        console.log(data);
+
+        if (data.status === "success") {
+
+            alert("Login successful");
+
+            dashboard("/Dashboard");
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Something went wrong");
+
+    }
+}
 
     return (
         <div className="Login_container">
@@ -45,7 +71,7 @@ function Login() {
                 <input type="email" value={email} id="email" onChange={(e) => setEmail(e.target.value)}  placeholder="abc@gmail.com"/>
                 <label htmlFor="">Password</label>
                 <input type="password" value={password} id="password" onChange={(e) => setPassword(e.target.value)} placeholder="123456"/>
-                <button type="submit" id="signin_button" onClick={()=>dashboard("/Dashboard")} disabled={!email && !password}>Sign in</button>
+                <button type="submit" id="signin_button"  disabled={!email && !password}>Sign in</button>
 
             </form>
             
