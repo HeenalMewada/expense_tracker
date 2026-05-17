@@ -38,9 +38,9 @@ expense-tracker/
 │   │   ├── register.php
 │   │   ├── dashboard.php
 │   │   └── db.php
-│   └── frontend/
-│       └── src/
-│           ├── components/
+│   └── src/
+│       └── frontend/
+│           ├── pages/
 │           │   ├── Login.jsx
 │           │   ├── Login.css
 │           │   ├── Register.jsx
