@@ -10,7 +10,6 @@ A full-stack web application to manage and track your daily expenses smartly. Bu
 - 📊 Dashboard with expense overview
 - ➕ Add, edit, and delete expenses
 - 📁 Category-wise expense management
-- 📅 Date-based filtering
 - 📱 Responsive UI
 
 ---
